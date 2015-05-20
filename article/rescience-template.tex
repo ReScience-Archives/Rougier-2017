@@ -1,0 +1,276 @@
+\documentclass[10pt,a4paper,onecolumn]{article}
+% \usepackage[utf8]{inputenc}
+\usepackage{marginnote}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{authblk,etoolbox}
+\usepackage{titlesec}
+\usepackage{calc}
+\usepackage{hyperref}
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={$author-meta$},
+            pdftitle={$title-meta$},
+            colorlinks=true,
+            citecolor=blue,
+            urlcolor=blue,
+            linkcolor=blue,
+            pdfborder={0 0 0}}
+\urlstyle{same}
+\usepackage{tcolorbox}
+\usepackage{ragged2e}
+\usepackage{fontspec}
+\usepackage{fontawesome}
+\usepackage{caption}
+\usepackage{listings}
+\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
+
+$if(highlighting-macros)$
+$highlighting-macros$
+\usepackage{framed}
+\colorlet{shadecolor}{blue!5}
+\renewenvironment{Shaded}{\begin{shaded*}}{\end{shaded*}}
+$endif$
+
+
+%\usepackage{fancyvrb}
+%\VerbatimFootnotes
+%\usepackage{graphicx}
+%\usepackage{mdframed}
+%\newmdenv[backgroundcolor=lightgray]{Shaded}
+
+
+\usepackage{longtable,booktabs}
+
+\usepackage[
+  backend=biber,
+%  style=alphabetic,
+%  citestyle=numeric
+]{biblatex}
+\bibliography{$bibliography$}
+
+
+
+% --- Macros ------------------------------------------------------------------
+\renewcommand*{\bibfont}{\small \sffamily}
+
+\definecolor{red}{HTML}{CF232B}
+\newcommand{\ReScience}{Re{\bfseries \textcolor{red}{Science}}}
+
+\newtcolorbox{rebox}
+   {colback=blue!5!white, colframe=blue!40!white,
+     boxrule=0.5pt, arc=2pt, fonttitle=\sffamily\scshape\bfseries,
+     left=6pt, right=20pt, top=6pt, bottom=6pt}
+
+\newtcolorbox{repobox}
+   {colback=red, colframe=red!75!black,
+     boxrule=0.5pt, arc=2pt, left=6pt, right=6pt, top=3pt, bottom=3pt}
+
+% --- Style -------------------------------------------------------------------
+\renewcommand*{\bibfont}{\small \sffamily}
+\renewcommand{\captionfont}{\small\sffamily}
+\renewcommand{\captionlabelfont}{\bfseries}
+
+\makeatletter
+\renewcommand\@biblabel[1]{{\bf #1.}}
+\makeatother
+
+% --- Page layout -------------------------------------------------------------
+\usepackage[top=3.5cm, bottom=3cm, right=1.5cm, left=1.5cm,
+            headheight=2.2cm, reversemp, includemp, marginparwidth=4.5cm]{geometry}
+
+% --- Section/SubSection/SubSubSection ----------------------------------------
+\titleformat{\section}
+  {\normalfont\sffamily\Large\bfseries}
+  {}{0pt}{}
+\titleformat{\subsection}
+  {\normalfont\sffamily\large\bfseries}
+  {}{0pt}{}
+\titleformat{\subsubsection}
+  {\normalfont\sffamily\bfseries}
+  {}{0pt}{}
+\titleformat*{\paragraph}
+  {\sffamily\normalsize}
+
+
+% --- Header / Footer ---------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%\renewcommand{\headrulewidth}{0.50pt}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[L]{\hspace{-1cm}\includegraphics[width=4.0cm]{rescience-logo.pdf}}
+\fancyhead[C]{}
+\fancyhead[R]{} 
+\renewcommand{\footrulewidth}{0.25pt}
+
+\fancyfoot[L]{\hypersetup{urlcolor=red}
+              \sffamily \ReScience~$$\vert$$
+              \href{http://rescience.github.io}{rescience.github.io}
+              \hypersetup{urlcolor=blue}}
+\fancyfoot[C]{\sffamily \thepage}
+\fancyfoot[R]{\sffamily $Publication.date$ $$\vert$$
+                        Volume $Publication.volume$ $$\vert$$
+                        Issue $Publication.issue$}
+\pagestyle{fancy}
+\makeatletter
+\let\ps@plain\ps@fancy
+\fancyheadoffset[L]{4.5cm}
+\fancyfootoffset[L]{4.5cm}
+
+% --- Title / Authors ---------------------------------------------------------
+% patch \maketitle so that it doesn't center
+\patchcmd{\@maketitle}{center}{flushleft}{}{}
+\patchcmd{\@maketitle}{center}{flushleft}{}{}
+% patch \maketitle so that the font size for the title is normal
+\patchcmd{\@maketitle}{\LARGE}{\LARGE\sffamily}{}{}
+% patch the patch by authblk so that the author block is flush left
+\def\maketitle{{%
+  \renewenvironment{tabular}[2][]
+    {\begin{flushleft}}
+    {\end{flushleft}}
+  \AB@maketitle}}
+\makeatletter
+\renewcommand\AB@affilsepx{ \protect\Affilfont}
+%\renewcommand\AB@affilnote[1]{{\bfseries #1}\hspace{2pt}}
+\renewcommand\AB@affilnote[1]{{\bfseries #1}\hspace{3pt}}
+\makeatother
+\renewcommand\Authfont{\sffamily\bfseries}
+\renewcommand\Affilfont{\sffamily\small\mdseries}
+\setlength{\affilsep}{1em}
+
+\LetLtxMacro{\OldIncludegraphics}{\includegraphics}
+\renewcommand{\includegraphics}[2][]{\OldIncludegraphics[width=12cm, #1]{#2}}
+
+
+% --- Document ----------------------------------------------------------------
+$if(Title)$
+\title{[Re] $Title$}
+$endif$
+
+$if(Author)$
+    \usepackage{authblk}
+    $if(Address)$
+        $for(Author)$
+            \author[$Author.affiliation$]{$Author.name$}
+        $endfor$
+        $for(Address)$
+            \affil[$Address.code$]{$Address.address$}
+        $endfor$
+    $else$
+        $for(Author)$
+            $if(Author.name)$
+                \author{$Author.name$}
+            $else$
+                \author{$Author$}
+            $endif$
+        $endfor$
+    $endif$
+$endif$
+
+$if(Contact)$
+\date{\vspace{-5mm}
+      \sffamily \small \href{mailto:$Contact$}{$Contact$}}
+$else$
+\date{}
+$endif$
+
+
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+
+
+\begin{document}
+\maketitle
+
+\marginpar{
+  %\hrule
+  \sffamily\small
+  %\vspace{2mm}
+  {\bfseries Editor}\\
+  $Editor$\\
+
+  {\bfseries Reviewers}\\
+  $for(Reviewer)$
+      $Reviewer$\\
+  $endfor$
+
+  {\bfseries Received}  $Publication.received$\\
+  {\bfseries Accepted}  $Publication.accepted$\\
+  {\bfseries Published} $Publication.published$\\
+
+  {\bfseries Licence}   CC-BY-SA
+
+  \begin{flushleft}
+  {\bfseries Competing Interests:}\\
+  The authors have declared that no competing interests exist.
+  \end{flushleft}
+
+  \hrule
+  \vspace{3mm}
+
+  \hypersetup{urlcolor=white}
+  
+  $if(Repository.article)$
+  \vspace{-1mm}
+  \begin{repobox}
+    \bfseries\normalsize
+      \href{$Repository.article$}{\faGithubAlt~Article repository}
+  \end{repobox}
+  $endif$
+  $if(Repository.code)$
+  \vspace{-1mm}
+  \begin{repobox}
+    \bfseries\normalsize
+      \href{$Repository.code$}{\faGithubAlt~Code repository}
+  \end{repobox}
+  $endif$
+  $if(Repository.data)$
+  \vspace{-1mm}
+  \begin{repobox}
+    \bfseries\normalsize
+      \href{$Repository.data$}{\faGithubAlt~Data repository}
+  \end{repobox}
+  $endif$
+  $if(Repository.notebook)$
+  \vspace{-1mm}
+  \begin{repobox}
+    \bfseries\normalsize
+      \href{$Repository.notebook$}{\faGithubAlt~Jupyter notebook}
+  \end{repobox}
+  $endif$
+  \hypersetup{urlcolor=blue}
+}
+
+\begin{rebox}
+\sffamily {\bfseries A reference implementation of}
+\small
+\begin{flushleft}
+\begin{itemize}
+  $for(Reproduction)$
+  \item[→] $Reproduction$
+  $endfor$
+\end{itemize}\par
+\end{flushleft}
+\end{rebox}
+
+
+$body$
+
+{\sffamily \small
+$if(natbib)$
+  $if(biblio-files)$
+    $if(biblio-title)$
+      $if(book-class)$
+        \renewcommand\bibname{$biblio-title$}
+      $else$
+        \renewcommand\refname{$biblio-title$}
+      $endif$
+    $endif$
+    \bibliography{$biblio-files$}
+  $endif$
+$endif$
+$if(biblatex)$
+  \printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+$endif$
+}
+\end{document}
