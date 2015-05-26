@@ -1,62 +1,80 @@
 ---
-title: "This is the title"
-author:
+Title: "This is the title"
+Author:
   - name: Name Surname
     affiliation: 1
   - name: Name Surname,
     affiliation: 2, 3
-address:
+Address:
   - code:    1
     address: Affiliation Dept/Program/Center, Institution Name, City, State, Country
   - code:    2
     address: Affiliation Dept/Program/Center, Institution Name, City, State, Country
   - code:    3
     address: Affiliation Dept/Program/Center, Institution Name, City, State, Country
-contact:
+Contact:
   - corresponding-author@mail.com
-editor:
+Editor:
   - Name Surname
-reviewer:
+Reviewer:
   - Name Surname
   - Name Surname
-publication:
+Publication:
   received:  Sep,  1, 2015
   accepted:  Sep, 1, 2015
   published: Sep, 1, 2015
   volume:    "**1**"
   issue:     "**1**"
   date:      Sep 2015
-repository:
+Repository:
   article:   "http://github.com/rescience/rescience-submission/article"
   code:      "http://github.com/rescience/rescience-submission/code"
   data:      
   notebook:  
-reproduction:
+Reproduction:
   - "Original article (title, authors, journal, doi)"
-bibliography: article.bib
+Bibliography:
+  article.bib
+
 ---
 
 # Introduction
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget porta
-erat. Morbi consectetur est vel gravida pretium. Suspendisse ut dui eu ante
-cursus gravida non sed sem. Nullam sapien tellus, commodo id velit id, eleifend
-volutpat quam. Phasellus mauris velit, dapibus finibus elementum vel, pulvinar
-non tellus. Nunc pellentesque pretium diam, quis maximus dolor faucibus
-id. Nunc convallis sodales ante, ut ullamcorper est egestas vitae. Nam sit amet
-enim ultrices, ultrices elit pulvinar, volutpat risus.
+The introduction should introduce the original paper and put it in context
+(e.g. is it an important paper in the domain ?). You must also specify if there
+was an implementation available somewhere and provide a link to it if relevant
+(and in such a case, you have to specify if the proposed replication is based
+on this original implementation). You should also introduce your implementation
+by listing language, tools, libraries, etc. and motivate choices if relevant.
 
 # Methods
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget porta
-erat. Morbi consectetur est vel gravida pretium. Suspendisse ut dui eu ante
-cursus gravida non sed sem. Nullam sapien tellus, commodo id velit id, eleifend
-volutpat quam. Phasellus mauris velit, dapibus finibus elementum vel, pulvinar
-non tellus. Nunc pellentesque pretium diam, quis maximus dolor faucibus
-id. Nunc convallis sodales ante, ut ullamcorper est egestas vitae. Nam sit amet
-enim ultrices, ultrices elit pulvinar, volutpat risus.
+The methods section should explain how you replicated the original results:
+
+* did you use paper description
+* did you contact authors ?
+* did you use original sources ?
+* did you modify some parts ?
+* etc.
+
+If relevevant in your domain, you should also provide a new standardized
+description of the work.
+
 
 # Results
+
+Results should be compared with original results and you have to explain why
+you think they are the same or why they may differ (qualitative result vs
+quantitative result). Note that it is not necessary to redo all the original
+analysis of the results.
+
+
+# Conclusion
+
+Conclusion, at the very minimum, should indicate very clearly if you were able
+to replicate original results. If it was not possible but you found the reason
+why (error in the original results), you should exlain it.
+
 
 Heading 1                          Heading 2
 ---------- ----------- ----------- ----------- ----------- -----------
@@ -76,16 +94,5 @@ A reference to citation @markdown.
 
 $$ A = \sqrt{\frac{B}{C}} $$ {#eq:1}
 
-
-
-# Conclusion
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget porta
-erat. Morbi consectetur est vel gravida pretium. Suspendisse ut dui eu ante
-cursus gravida non sed sem. Nullam sapien tellus, commodo id velit id, eleifend
-volutpat quam. Phasellus mauris velit, dapibus finibus elementum vel, pulvinar
-non tellus. Nunc pellentesque pretium diam, quis maximus dolor faucibus
-id. Nunc convallis sodales ante, ut ullamcorper est egestas vitae. Nam sit amet
-enim ultrices, ultrices elit pulvinar, volutpat risus.
 
 # References

@@ -143,33 +143,33 @@ $endif$
 
 
 % --- Document ----------------------------------------------------------------
-$if(title)$
-\title{[Re] $title$}
+$if(Title)$
+\title{[Re] $Title$}
 $endif$
 
-$if(author)$
+$if(Author)$
     \usepackage{authblk}
-    $if(address)$
-        $for(author)$
-            \author[$author.affiliation$]{$author.name$}
+    $if(Address)$
+        $for(Author)$
+            \author[$Author.affiliation$]{$Author.name$}
         $endfor$
-        $for(address)$
-            \affil[$address.code$]{$address.address$}
+        $for(Address)$
+            \affil[$Address.code$]{$Address.address$}
         $endfor$
     $else$
-        $for(author)$
-            $if(author.name)$
-                \author{$author.name$}
+        $for(Author)$
+            $if(Author.name)$
+                \author{$Author.name$}
             $else$
-                \author{$author$}
+                \author{$Author$}
             $endif$
         $endfor$
     $endif$
 $endif$
 
-$if(contact)$
+$if(Contact)$
 \date{\vspace{-5mm}
-      \sffamily \small \href{mailto:$contact$}{$contact$}}
+      \sffamily \small \href{mailto:$Contact$}{$Contact$}}
 $else$
 \date{}
 $endif$
@@ -187,16 +187,16 @@ $endif$
   \sffamily\small
   %\vspace{2mm}
   {\bfseries Editor}\\
-  $editor$\\
+  $Editor$\\
 
   {\bfseries Reviewers}\\
-  $for(reviewer)$
-      $reviewer$\\
+  $for(Reviewer)$
+      $Reviewer$\\
   $endfor$
 
-  {\bfseries Received}  $publication.received$\\
-  {\bfseries Accepted}  $publication.accepted$\\
-  {\bfseries Published} $publication.published$\\
+  {\bfseries Received}  $Publication.received$\\
+  {\bfseries Accepted}  $Publication.accepted$\\
+  {\bfseries Published} $Publication.published$\\
 
   {\bfseries Licence}   CC-BY-SA
 
@@ -210,32 +210,32 @@ $endif$
 
   \hypersetup{urlcolor=white}
   
-  $if(repository.article)$
+  $if(Repository.article)$
   \vspace{-1mm}
   \begin{repobox}
     \bfseries\normalsize
-      \href{$repository.article$}{\faGithubAlt~Article repository}
+      \href{$Repository.article$}{\faGithubAlt~Article repository}
   \end{repobox}
   $endif$
-  $if(repository.code)$
+  $if(Repository.code)$
   \vspace{-1mm}
   \begin{repobox}
     \bfseries\normalsize
-      \href{$repository.code$}{\faGithubAlt~Code repository}
+      \href{$Repository.code$}{\faGithubAlt~Code repository}
   \end{repobox}
   $endif$
-  $if(repository.data)$
+  $if(Repository.data)$
   \vspace{-1mm}
   \begin{repobox}
     \bfseries\normalsize
-      \href{$repository.data$}{\faGithubAlt~Data repository}
+      \href{$Repository.data$}{\faGithubAlt~Data repository}
   \end{repobox}
   $endif$
-  $if(repository.notebook)$
+  $if(Repository.notebook)$
   \vspace{-1mm}
   \begin{repobox}
     \bfseries\normalsize
-      \href{$repository.notebook$}{\faGithubAlt~Jupyter notebook}
+      \href{$Repository.notebook$}{\faGithubAlt~Jupyter notebook}
   \end{repobox}
   $endif$
   \hypersetup{urlcolor=blue}
@@ -246,8 +246,8 @@ $endif$
 \small
 \begin{flushleft}
 \begin{itemize}
-  $for(reproduction)$
-  \item[→] $reproduction$
+  $for(Reproduction)$
+  \item[→] $Reproduction$
   $endfor$
 \end{itemize}\par
 \end{flushleft}
