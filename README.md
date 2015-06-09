@@ -37,7 +37,7 @@ This is the submission repository for the [Re**Science** journal](https://github
    $ git push origin AUTHOR1-AUTHOR2
    ```
 
-7. Issue a [pull request](https://help.github.com/articles/using-pull-requests/) (PR) to Re**Science** with title "Review Request" and insert the followin text in the description:
+7. Issue a [pull request](https://help.github.com/articles/using-pull-requests/) (PR) to Re**Science** with title "Review Request" and insert the following text in the description:
 
   ```
   **AUTHOR**
