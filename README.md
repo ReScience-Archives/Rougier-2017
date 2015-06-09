@@ -51,6 +51,6 @@ This is the submission repository for the [Re**Science** journal](https://github
   I believed the original results have been faithfully reproduced as explained in the accompanying article.
   ```
 
-8. Assign the PR to an editor from the [editorial board](https://github.com/ReScience/ReScience/wiki/Board)
+8. Assign the PR to an editor from the [editorial board](https://github.com/ReScience/ReScience/wiki/Editorial-Board)
 
 9. Answer questions and requests made in the PR conversation page.
