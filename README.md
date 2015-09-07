@@ -1,7 +1,7 @@
 
 ### ReScience submission repository
 
-This is the submission repository for the [Re**Science** journal](https://github.com/ReScience/ReScience/wiki).
+This is the submission repository for the [Re**Science** journal](https://rescience.github.io).
 
 
 ### How to submit an article ?
@@ -24,7 +24,7 @@ This is the submission repository for the [Re**Science** journal](https://github
    ```
 
 
-5. Add your code & article (see [author guidelines](https://github.com/ReScience/ReScience/wiki/Author-Guidelines)) and commit your changes:
+5. Add your code & article (see [author guidelines](https://rescience.github.io/write)) and commit your changes:
 
    ```
    $ git commit -a -m "Some comment"
@@ -51,6 +51,6 @@ This is the submission repository for the [Re**Science** journal](https://github
   I believed the original results have been faithfully reproduced as explained in the accompanying article.
   ```
 
-8. Assign the PR to an editor from the [editorial board](https://github.com/ReScience/ReScience/wiki/Editorial-Board)
+8. Assign the PR to an editor from the [editorial board](https://rescience.github.io/board)
 
 9. Answer questions and requests made in the PR conversation page.
