@@ -1,7 +1,7 @@
 ### Code repository
 
-Don't forget to update the license (default is BSD). You're free to use any
-Open Source license such as Apache, BSD, GPL, or compatable.
+Don't forget to update the license (default is BSD). You are free to use any
+Open Source license such as Apache, BSD, GPL, or compatible.
 
 See
 [the Debian Free Software Guidelines](https://www.debian.org/social_contract#guidelines)
