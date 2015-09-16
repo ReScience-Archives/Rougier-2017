@@ -34,7 +34,7 @@ Repository:
 Reproduction:
   - "Original article (title, authors, journal, doi)"
 Bibliography:
-  article.bib
+  your_article_name.bib
 
 ---
 

@@ -17,10 +17,10 @@ $ cabal install pandoc-crossref
 In a console, type:
 
 ```
-pandoc --standalone --filter ~/.cabal/bin/pandoc-crossref --template=rescience-template.tex --latex-engine=xelatex --biblatex --bibliography=article.bib -M "crossrefYaml=crossref.yaml" --output article.tex article.md
-xelatex article
-biber article
-xelatex article
-xelatex article
+pandoc --standalone --filter ~/.cabal/bin/pandoc-crossref --template=rescience-template.tex --latex-engine=xelatex --biblatex --bibliography=article.bib -M "crossrefYaml=crossref.yaml" --output your_article_name.tex your_article_name.md
+xelatex your_article_name
+biber your_article_name
+xelatex your_article_name
+xelatex your_article_name
 ```
 
