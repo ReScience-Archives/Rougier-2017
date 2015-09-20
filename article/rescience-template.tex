@@ -9,8 +9,18 @@
 \usepackage{hyperref}
 \hypersetup{breaklinks=true,
             bookmarks=true,
-            pdfauthor={$author-meta$},
-            pdftitle={$title-meta$},
+            pdfauthor=
+{
+$if(Author)$
+  $for(Author)$
+    $if(Author.name)$$Author.name$,$else$$Author$,$endif$
+  $endfor$
+$endif$
+},
+            pdftitle=
+{
+$if(Title)$[Re] $Title$$endif$
+},
             colorlinks=true,
             citecolor=blue,
             urlcolor=blue,
