@@ -48,9 +48,9 @@ This is the submission repository for the [Re**Science** journal](https://rescie
 
   * References of the paper holding results you're replicating
 
-  I believed the original results have been faithfully reproduced as explained in the accompanying article.
+  I believe the original results have been faithfully reproduced as explained in the accompanying article.
   ```
 
-8. Assign the PR to an editor from the [editorial board](https://rescience.github.io/board)
+8. Assign the PR to an editor from the [editorial board](https://rescience.github.io/board).
 
 9. Answer questions and requests made in the PR conversation page.
