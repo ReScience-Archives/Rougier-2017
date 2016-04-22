@@ -3,7 +3,6 @@
 
 This is the submission repository for the [Re**Science** journal](https://rescience.github.io).
 
-
 ### How to submit an article ?
 
 
