@@ -34,7 +34,7 @@ Repository:
 Reproduction:
   - "Original article (title, authors, journal, doi)"
 Bibliography:
-  your_article_name.bib
+  bibliography.bib
 
 ---
 
@@ -90,7 +90,7 @@ A reference to figure @fig:logo.
 A reference to equation @eq:1.
 A reference to citation @markdown.
 
-![Figure caption](rescience-logo.pdf) {#fig:logo}
+![Figure caption](rescience-logo.pdf){#fig:logo}
 
 $$ A = \sqrt{\frac{B}{C}} $$ {#eq:1}
 

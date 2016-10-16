@@ -1,3 +1,8 @@
+### Important
+
+Don't forget to change the name of the Name-YEAR file to reflect all the
+authors name and the current year.
+
 ### Required tools for producing the pdf
 
 You'll need [pandoc](http://pandoc.org) (a universal document converter) and a
@@ -17,10 +22,11 @@ $ cabal install pandoc-crossref
 In a console, type:
 
 ```
-pandoc --standalone --filter ~/.cabal/bin/pandoc-crossref --template=rescience-template.tex --latex-engine=xelatex --biblatex --bibliography=your_article_name.bib -M "crossrefYaml=crossref.yaml" --output your_article_name.tex your_article_name.md
-xelatex your_article_name
-biber your_article_name
-xelatex your_article_name
-xelatex your_article_name
+pandoc --standalone --filter ~/.cabal/bin/pandoc-crossref --template=rescience-template.tex --latex-engine=xelatex --biblatex --bibliography=bibliography.bib -M "crossrefYaml=crossref.yaml" --output Name-YEAR.tex Name-YEAR.md
+xelatex Name-YEAR
+biber Name-YEAR
+xelatex Name-YEAR
+xelatex Name-YEAR
 ```
 
+Alternativaley, you can also type `make` after having edited the Makefile.
