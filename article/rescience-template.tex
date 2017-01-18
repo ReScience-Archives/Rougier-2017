@@ -9,8 +9,18 @@
 \usepackage{hyperref}
 \hypersetup{breaklinks=true,
             bookmarks=true,
-            pdfauthor={$author-meta$},
-            pdftitle={$title-meta$},
+            pdfauthor=
+{
+$if(Author)$
+  $for(Author)$
+    $if(Author.name)$$Author.name$,$else$$Author$,$endif$
+  $endfor$
+$endif$
+},
+            pdftitle=
+{
+$if(Title)$[Re] $Title$$endif$
+},
             colorlinks=true,
             citecolor=blue,
             urlcolor=blue,
@@ -65,6 +75,10 @@ $endif$
 \newtcolorbox{repobox}
    {colback=red, colframe=red!75!black,
      boxrule=0.5pt, arc=2pt, left=6pt, right=6pt, top=3pt, bottom=3pt}
+
+% fix for pandoc 1.14     
+\newcommand{\tightlist}{%
+  \setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}\setlength{\parsep}{0pt}}
 
 % --- Style -------------------------------------------------------------------
 \renewcommand*{\bibfont}{\small \sffamily}

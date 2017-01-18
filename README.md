@@ -3,7 +3,6 @@
 
 This is the submission repository for the [Re**Science** journal](https://rescience.github.io).
 
-
 ### How to submit an article ?
 
 
@@ -37,20 +36,56 @@ This is the submission repository for the [Re**Science** journal](https://rescie
    $ git push origin AUTHOR1-AUTHOR2
    ```
 
-7. Issue a [pull request](https://help.github.com/articles/using-pull-requests/) (PR) to Re**Science** with title "Review Request" and insert the following text in the description:
+7. Issue a [pull request](https://help.github.com/articles/using-pull-requests/) (PR) to Re**Science** with title containing author(s) name and follow the template that will appear once you opened the pull request:
 
   ```
   **AUTHOR**
 
   Dear @ReScience/editors,
 
-  I request a review for the reproduction of the following paper:
+  I request a review for the following replication:
 
-  * References of the paper holding results you're replicating
+  ### Original article
 
-  I believed the original results have been faithfully reproduced as explained in the accompanying article.
+  **Title:**  
+  **Author(s):**  
+  **Journal (or Conference):**  
+  **Year:**  
+  **DOI:**  
+  **PDF:**   
+
+  ### Replication
+
+  **Author(s)**:   
+  **Repository**:  
+  **PDF**:  
+  **Keywords**:  
+  **Language**:  
+  **Domain**:  
+
+  ### Results
+
+  * [ ] Article has been fully replicated
+  * [ ] Article has been partially replicated
+  * [ ] Article has not been replicated
+
+  ### Potential reviewers
+  <!-- If you know potential reviewers, you can tell us here -->
+  <!-- You can look at http://rescience.github.io/board for the -->
+  <!-- list of registered reviewers (but you can propose others) -->
+
+  ---
+
+  **EDITOR**
+
+  * [ ] Editor acknowledgment
+  * [ ] Reviewer 1 
+  * [ ] Reviewer 2
+  * [ ] Review 1 decision [accept/reject]
+  * [ ] Review 2 decision [accept/reject]
+  * [ ] Editor decision [accept/reject]
   ```
 
-8. Assign the PR to an editor from the [editorial board](https://rescience.github.io/board)
+8. You can suggest reviewers from [editorial board](https://rescience.github.io/board).
 
 9. Answer questions and requests made in the PR conversation page.
