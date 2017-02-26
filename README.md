@@ -1,5 +1,5 @@
 
-# Introduction
+# Weighted Vornoi Stippling
 
 ![](data/boots-stipple.png)
 
@@ -15,7 +15,7 @@ traditional artistic technique of stippling that places small dots of ink onto
 paper such that their density give the impression of tone*.
 
 
-### Pre-requisites
+## Pre-requisites
 
 This replication has been written and tested on OSX 10.12 (Sierra) using the
 following packages:
@@ -30,7 +30,7 @@ Original data is not freelty available and you will need to download the
 [original images](http://cs.nyu.edu/~ajsecord/npar2002/StipplingOriginals.zip)
 prior to running the `run.sh` to obtain results.
 
-### Usage
+## Usage
 
 ```
  usage: stippler.py [--n_iter n] [--n_point n] [--save] [--force]
