@@ -9,13 +9,13 @@ This is a replication of the following article:
 International Symposium on Non-photorealistic Animation and
 Rendering. NPAR ’02. ACM, 2002, pp. 37– 43.
 
-where Adrian Secord introduced a *techniques for generating stipple drawings
-from grayscale images using weighted centroidal Voronoi diagrams* as in *the
+where the author introduced a *techniques for generating stipple drawings from
+grayscale images using weighted centroidal Voronoi diagrams* as in *the
 traditional artistic technique of stippling that places small dots of ink onto
 paper such that their density give the impression of tone*.
 
 
-# Pre-requisites
+### Pre-requisites
 
 This replication has been written and tested on OSX 10.12 (Sierra) using the
 following packages:
@@ -25,21 +25,21 @@ following packages:
  * Scipy 0.18.1
  * Matplotlib 2.0.0
  
-Original data is not freelty available and you will need to download it prior
-to running the `run.sh` to obtain results.
+Original data is not freelty available and you will need to download the
+[original images](http://cs.nyu.edu/~ajsecord/npar2002/StipplingOriginals.zip)
+prior to running the `run.sh` to obtain results.
 
-# Usage
+### Usage
 
 ```
- usage: stippler.py [-h] [--n_iter n] [--n_point n]
-                    [--pointsize min,max) (min,max] [--figsize w,h] [--force]
-                    [--save] [--display] [--interactive]
-                    image filename
+ usage: stippler.py [--n_iter n] [--n_point n] [--save] [--force]
+                    [--pointsize min,max) (min,max] [--figsize w,h]
+                    [--display] [--interactive] file
 
  Weighted Vororonoi Stippler
 
  positional arguments:
-   image filename        Density image filename
+   file                  Density image filename
 
  optional arguments:
    -h, --help            show this help message and exit
@@ -53,3 +53,11 @@ to running the `run.sh` to obtain results.
    --display             Display final result
    --interactive         Display intermediate results (slower)
 ```
+
+### Examples
+
+![](article/boots-montage.png)
+
+![](article/pot-plant-montage.png)
+
+![](article/leafs-plant-montage.png)
