@@ -1,5 +1,5 @@
 
-# Weighted Vornoi Stippling
+# Weighted Voronoi Stippling
 
 ![](../data/boots-stipple.png)
 
