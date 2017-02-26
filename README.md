@@ -24,6 +24,7 @@ following packages:
  * Numpy 1.12.0
  * Scipy 0.18.1
  * Matplotlib 2.0.0
+ * tqdm 4.10
  
 Original data is not freelty available and you will need to download the
 [original images](http://cs.nyu.edu/~ajsecord/npar2002/StipplingOriginals.zip)

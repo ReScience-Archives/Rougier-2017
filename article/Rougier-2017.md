@@ -3,6 +3,7 @@ Title: "Weighted Voronoi Stippling"
 Author:
   - name: Nicolas P. Rougier
     affiliation: 1,2,3
+    ORCID: 0000-0003-0330-9428
 Address:
   - code:    1
     address: INRIA Bordeaux Sud-Ouest, Bordeaux, France.

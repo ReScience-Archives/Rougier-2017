@@ -1,8 +1,3 @@
-### Important
-
-Don't forget to change the name of the Name-YEAR file to reflect all the
-authors name and the current year.
-
 ### Required tools for producing the pdf
 
 You'll need [pandoc](http://pandoc.org) (a universal document converter) and a
