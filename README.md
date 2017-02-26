@@ -1,91 +1,55 @@
 
-### ReScience submission repository
+# Introduction
 
-This is the submission repository for the [Re**Science** journal](https://rescience.github.io).
+![](data/boots-stipple.png)
 
-### How to submit an article ?
+This is a replication of the following article:
 
+*Weighted Voronoi Stippling*, Adrian Secord. In: Proceedings of the 2nd
+International Symposium on Non-photorealistic Animation and
+Rendering. NPAR ’02. ACM, 2002, pp. 37– 43.
 
-1. Create a [github](https://github.com) account
-
-2. [Fork](https://help.github.com/articles/fork-a-repo/) the [ReScience submission](https://github.com/ReScience/ReScience-submission) repository
-
-3. Clone this new repository into your desktop environment
-
-   ```
-   $ git clone https://github.com/YOUR-USERNAME/ReScience-submission
-   ```
-
-4. Create a branch (the branch name should be author names separated with dashes)
-
-   ```
-   $ git checkout -b AUTHOR1-AUTHOR2
-   ```
+where Adrian Secord introduced a *techniques for generating stipple drawings
+from grayscale images using weighted centroidal Voronoi diagrams* as in *the
+traditional artistic technique of stippling that places small dots of ink onto
+paper such that their density give the impression of tone*.
 
 
-5. Add your code & article (see [author guidelines](https://rescience.github.io/write)) and commit your changes:
+# Pre-requisites
 
-   ```
-   $ git commit -a -m "Some comment"
-   ```
+This replication has been written and tested on OSX 10.12 (Sierra) using the
+following packages:
 
+ * Python 3.6.0
+ * Numpy 1.12.0
+ * Scipy 0.18.1
+ * Matplotlib 2.0.0
+ 
+Original data is not freelty available and you will need to download it prior
+to running the `run.sh` to obtain results.
 
-6. [Push](https://help.github.com/articles/pushing-to-a-remote/) to github
+# Usage
 
-   ```
-   $ git push origin AUTHOR1-AUTHOR2
-   ```
+```
+ usage: stippler.py [-h] [--n_iter n] [--n_point n]
+                    [--pointsize min,max) (min,max] [--figsize w,h] [--force]
+                    [--save] [--display] [--interactive]
+                    image filename
 
-7. Issue a [pull request](https://help.github.com/articles/using-pull-requests/) (PR) to Re**Science** with title containing author(s) name and follow the template that will appear once you opened the pull request:
+ Weighted Vororonoi Stippler
 
-  ```
-  **AUTHOR**
+ positional arguments:
+   image filename        Density image filename
 
-  Dear @ReScience/editors,
-
-  I request a review for the following replication:
-
-  ### Original article
-
-  **Title:**  
-  **Author(s):**  
-  **Journal (or Conference):**  
-  **Year:**  
-  **DOI:**  
-  **PDF:**   
-
-  ### Replication
-
-  **Author(s)**:   
-  **Repository**:  
-  **PDF**:  
-  **Keywords**:  
-  **Language**:  
-  **Domain**:  
-
-  ### Results
-
-  * [ ] Article has been fully replicated
-  * [ ] Article has been partially replicated
-  * [ ] Article has not been replicated
-
-  ### Potential reviewers
-  <!-- If you know potential reviewers, you can tell us here -->
-  <!-- You can look at http://rescience.github.io/board for the -->
-  <!-- list of registered reviewers (but you can propose others) -->
-
-  ---
-
-  **EDITOR**
-
-  * [ ] Editor acknowledgment
-  * [ ] Reviewer 1 
-  * [ ] Reviewer 2
-  * [ ] Review 1 decision [accept/reject]
-  * [ ] Review 2 decision [accept/reject]
-  * [ ] Editor decision [accept/reject]
-  ```
-
-8. You can suggest reviewers from [editorial board](https://rescience.github.io/board).
-
-9. Answer questions and requests made in the PR conversation page.
+ optional arguments:
+   -h, --help            show this help message and exit
+   --n_iter n            Maximum number of iterations
+   --n_point n           Number of points
+   --pointsize (min,max) (min,max)
+                         Point mix/max size for final display
+   --figsize w,h         Figure size
+   --force               Force recomputation
+   --save                Save computed points
+   --display             Display final result
+   --interactive         Display intermediate results (slower)
+```
