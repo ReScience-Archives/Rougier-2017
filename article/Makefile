@@ -1,6 +1,6 @@
-SOURCE   = Name-YEAR
+SOURCE   = Rougier-2017
 MDFILE   = $(SOURCE).md
-BIBFILE  = bibliography.bib
+BIBFILE  = Rougier-2017.bib
 TEXFILE  = $(SOURCE).tex
 PDFFILE  = $(SOURCE).pdf
 TEMPLATE = rescience-template.tex
