@@ -33,7 +33,7 @@ prior to running the `run.sh` to obtain results.
 
 ```
  usage: stippler.py [--n_iter n] [--n_point n] [--save] [--force]
-                    [--pointsize min,max) (min,max] [--figsize w,h]
+                    [--pointsize min,max] [--figsize w,h]
                     [--display] [--interactive] file
 
  Weighted Vororonoi Stippler
@@ -53,11 +53,3 @@ prior to running the `run.sh` to obtain results.
    --display             Display final result
    --interactive         Display intermediate results (slower)
 ```
-
-### Examples
-
-![](article/boots-montage.png)
-
-![](article/pot-plant-montage.png)
-
-![](article/leafs-plant-montage.png)
