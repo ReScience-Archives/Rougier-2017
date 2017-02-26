@@ -11,6 +11,8 @@ Government, this image or media is in the public domain in the United States.
 
 ### Jelly Bean Plant ([sources](https://commons.wikimedia.org/wiki/File:Sedum_rubrotinctum.jpg))
 
+![](./pot-plant.jpg)
+
 Copyright 2009 [JJ Harrison](https://en.wikipedia.org/wiki/User:JJ_Harrison?rdfrom=commons:User:JJ_Harrison)
 
 This file is licensed under the Creative Commons Attribution-Share Alike 2.5
@@ -30,5 +32,7 @@ Under the following conditions:
 
 
 ### Leafs ([sources](https://pixabay.com/en/peperomia-pellucida-green-leaves-398858/))
+
+![](./leafs.jpg)
 
 Free for commercial use. No attribution required 
