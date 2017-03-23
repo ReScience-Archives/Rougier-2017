@@ -50,7 +50,7 @@ def normalize(D):
     if Vmax - Vmin > 1e-5:
         D = (D-Vmin)/(Vmax-Vmin)
     else:
-        D = np.ones_like(D)
+        D = np.zeros_like(D)
     return D
 
 
@@ -137,7 +137,6 @@ if __name__ == '__main__':
     density = scipy.misc.imread(filename, flatten=True, mode='L')
     density = 1.0 - normalize(density)
     density = density[::-1, :]
-    
     density_P = density.cumsum(axis=1)
     density_Q = density_P.cumsum(axis=1)
 
