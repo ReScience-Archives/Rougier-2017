@@ -67,13 +67,16 @@ def initialization(n, D):
 
     samples = []
     while len(samples) < n:
-        X = np.random.randint(0, density.shape[1], 10*n)
-        Y = np.random.randint(0, density.shape[0], 10*n)
+        # X = np.random.randint(0, density.shape[1], 10*n)
+        # Y = np.random.randint(0, density.shape[0], 10*n)
+        X = np.random.uniform(0, density.shape[1], 10*n)
+        Y = np.random.uniform(0, density.shape[0], 10*n)
         P = np.random.uniform(0, 1, 10*n)
         index = 0
         while index < len(X) and len(samples) < n:
             x, y = X[index], Y[index]
-            if P[index] < D[y, x]:
+            x_, y_ = int(np.floor(x)), int(np.floor(y))
+            if P[index] < D[y_, x_]:
                 samples.append([x, y])
             index += 1
     return np.array(samples)
@@ -131,9 +134,10 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     filename = args.filename
-    density = 1.0 - scipy.misc.imread(filename, flatten=True, mode='L')/255.0
+    density = scipy.misc.imread(filename, flatten=True, mode='L')
+    density = 1.0 - normalize(density)
     density = density[::-1, :]
-    density = normalize(density)
+    
     density_P = density.cumsum(axis=1)
     density_Q = density_P.cumsum(axis=1)
 
@@ -176,9 +180,6 @@ if __name__ == '__main__':
 
         def update(frame):
             global points
-            # Full version from all the points
-            # regions, points = voronoi.centroids(points, density)
-            # Optimized version from only the outline
             regions, points = voronoi.centroids(points, density, density_P, density_Q)
             Pi = points.astype(int)
             X = np.maximum(np.minimum(Pi[:, 0], density.shape[1]-1), 0)
@@ -203,10 +204,8 @@ if __name__ == '__main__':
 
     elif not os.path.exists(dat_filename) or args.force:
         for i in tqdm.trange(args.n_iter):
-            # Full version from all the points
-            # regions, points = voronoi.centroids(points, density)
-            # Optimized version from only the outline
             regions, points = voronoi.centroids(points, density, density_P, density_Q)
+
             
     if (args.save or args.display) and not args.interactive:
         fig = plt.figure(figsize=(args.figsize, args.figsize/ratio),

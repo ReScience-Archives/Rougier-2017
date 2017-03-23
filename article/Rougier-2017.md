@@ -63,7 +63,7 @@ implementation that is simple and provides high stippling quality.
 
 We applied the method proposed in the original paper with some variations due
 to the non-use of the GPU for computing the Voronoi diagram. In the original
-article, author computes the Voronoi diagram by taking advantage of the graphic
+article, the author computes the Voronoi diagram by taking advantage of the graphic
 card (GPU) and the fact that a set of cones seen from above actually represents
 a Voronoi diagram (see [@Hoff:1999]). We use instead
 the [QHull](http://www.qhull.org) library (through

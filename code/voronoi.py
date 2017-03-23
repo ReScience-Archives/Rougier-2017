@@ -67,7 +67,7 @@ def rasterize_outline(V):
     X, Y = V[:, 0], V[:, 1]
     ymin = int(np.ceil(Y.min()))
     ymax = int(np.floor(Y.max()))
-    points = np.zeros((1+(ymax-ymin)*2, 3), dtype=int)
+    points = np.zeros((2+(ymax-ymin)*2, 3), dtype=int)
     index = 0
     for y in range(ymin, ymax+1):
         segments = []
@@ -114,7 +114,10 @@ def weighted_centroid_outline(V, P, Q):
     d = (P[Y,X2]-P[Y,X1]).sum()
     x = ((X2*P[Y,X2] - Q[Y,X2]) - (X1*P[Y,X1] - Q[Y,X1])).sum()
     y = (Y * (P[Y,X2] - P[Y,X1])).sum()
-    return [x/d, y/d]
+    if d:
+        return [x/d, y/d]
+    return [x, y]
+    
 
 
 def uniform_centroid(V):
@@ -153,18 +156,6 @@ def weighted_centroid(V, D):
     D = D[Pi[:, 1], Pi[:, 0]].reshape(len(Pi), 1)
     return ((P*D)).sum(axis=0) / D.sum()
 
-
-# def centroid(V, D=None, P=None, Q=None):
-#     """
-#     Given an ordered set of vertices V describing a polygon, return the surface
-#     uniform centroid or the weighted centroid according to density D.
-#     """
-    
-#     if D is None:
-#         return uniform_centroid(V)
-#     elif P is None:
-#         return weighted_centroid(V, D)
-#     return weighted_centroid_outline(V, P, Q)
 
 
 
@@ -243,7 +234,12 @@ def centroids(points, density, density_P=None, density_Q=None):
     centroids = []
     for region in regions:
         vertices = vor.vertices[region + [region[0]], :]
-        centroid = weighted_centroid(vertices, density)
-        # centroid = weighted_centroid_outline(vertices, density_P, density_Q)
+
+        # Full version from all the points
+        # centroid = weighted_centroid(vertices, density)
+
+        # Optimized version from only the outline
+        centroid = weighted_centroid_outline(vertices, density_P, density_Q)
+
         centroids.append(centroid)
     return regions, np.array(centroids)

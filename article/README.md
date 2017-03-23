@@ -17,7 +17,7 @@ $ cabal install pandoc-crossref
 In a console, type:
 
 ```
-pandoc --standalone --filter ~/.cabal/bin/pandoc-crossref --template=rescience-template.tex --latex-engine=xelatex --biblatex --bibliography=bibliography.bib -M "crossrefYaml=crossref.yaml" --output Rougier-2017.tex Rougier-2017.md
+pandoc --standalone --filter ~/.cabal/bin/pandoc-crossref --template=rescience-template.tex --latex-engine=xelatex --biblatex --bibliography=Rougier-2017.bib -M "crossrefYaml=crossref.yaml" --output Rougier-2017.tex Rougier-2017.md
 xelatex Rougier-2017
 biber Rougier-2017
 xelatex Rougier-2017
