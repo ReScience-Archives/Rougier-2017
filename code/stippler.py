@@ -134,6 +134,8 @@ if __name__ == '__main__':
     density = 1.0 - scipy.misc.imread(filename, flatten=True, mode='L')/255.0
     density = density[::-1, :]
     density = normalize(density)
+    density_P = density.cumsum(axis=1)
+    density_Q = density_P.cumsum(axis=1)
 
     dirname = os.path.dirname(filename)
     basename = (os.path.basename(filename).split('.'))[0]
@@ -174,7 +176,10 @@ if __name__ == '__main__':
 
         def update(frame):
             global points
-            regions, points = voronoi.centroids(points, density)
+            # Full version from all the points
+            # regions, points = voronoi.centroids(points, density)
+            # Optimized version from only the outline
+            regions, points = voronoi.centroids(points, density, density_P, density_Q)
             Pi = points.astype(int)
             X = np.maximum(np.minimum(Pi[:, 0], density.shape[1]-1), 0)
             Y = np.maximum(np.minimum(Pi[:, 1], density.shape[0]-1), 0)
@@ -198,8 +203,11 @@ if __name__ == '__main__':
 
     elif not os.path.exists(dat_filename) or args.force:
         for i in tqdm.trange(args.n_iter):
-            regions, points = stipple(points, density)
-
+            # Full version from all the points
+            # regions, points = voronoi.centroids(points, density)
+            # Optimized version from only the outline
+            regions, points = voronoi.centroids(points, density, density_P, density_Q)
+            
     if (args.save or args.display) and not args.interactive:
         fig = plt.figure(figsize=(args.figsize, args.figsize/ratio),
                          facecolor="white")
@@ -226,7 +234,7 @@ if __name__ == '__main__':
         if args.display:
             plt.show()
 
-    # Plot voronoi regions
+    # Plot voronoi regions if you want
     # for region in vor.filtered_regions:
     #     vertices = vor.vertices[region, :]
     #     ax.plot(vertices[:, 0], vertices[:, 1], linewidth=.5, color='.5' )
