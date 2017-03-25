@@ -1,0 +1,179 @@
+# -----------------------------------------------------------------------------
+# Copyright (c) 2009-2016 Nicolas P. Rougier. All rights reserved.
+# Distributed under the (new) BSD License.
+# -----------------------------------------------------------------------------
+import numpy as np
+import scipy.misc
+import scipy.ndimage
+from glumpy import app, gl, glm, gloo
+from glumpy.graphics.filter import Filter
+
+cone_vertex = """
+uniform mat4 projection;
+attribute vec2 translate;
+attribute vec3 position;
+attribute vec3 color;
+varying vec3 v_color;
+void main()
+{
+    v_color.rgb = color.rgb;
+    gl_Position = projection * vec4(position.xy+translate, position.z ,1.0);
+}
+"""
+
+cone_fragment = """
+varying vec3 v_color;
+void main()
+{
+    gl_FragColor = vec4(v_color.rgb, 1.0);
+}
+"""
+
+def normalize(D):
+    Vmin, Vmax = D.min(), D.max()
+    if Vmax - Vmin > 1e-5:
+        D = (D-Vmin)/(Vmax-Vmin)
+    else:
+        D = np.zeros_like(D)
+    return D
+
+
+def initialization(n, D):
+    """
+    Return n points distributed over [xmin, xmax] x [ymin, ymax]
+    according to (normalized) density distribution.
+
+    with xmin, xmax = 0, density.shape[1]
+         ymin, ymax = 0, density.shape[0]
+
+    The algorithm here is a simple rejection sampling.
+    """
+
+    samples = []
+    while len(samples) < n:
+        # X = np.random.randint(0, density.shape[1], 10*n)
+        # Y = np.random.randint(0, density.shape[0], 10*n)
+        X = np.random.uniform(0, density.shape[1], 10*n)
+        Y = np.random.uniform(0, density.shape[0], 10*n)
+        P = np.random.uniform(0, 1, 10*n)
+        index = 0
+        while index < len(X) and len(samples) < n:
+            x, y = X[index], Y[index]
+            x_, y_ = int(np.floor(x)), int(np.floor(y))
+            if P[index] < D[y_, x_]:
+                samples.append([x, y])
+            index += 1
+    return np.array(samples)
+
+
+
+n_point = 20000
+filename = "../data/original/plant2_400x400.png"
+
+density = scipy.misc.imread(filename, flatten=True, mode='L')
+# We want (approximately) 250 pixels per voronoi region
+zoom = (n_point * 200) / (density.shape[0]*density.shape[1])
+zoom = int(round(np.sqrt(zoom)))
+density = scipy.ndimage.zoom(density, zoom, order=0)
+#density = np.minimum(density, 220)
+density = 1.0 - normalize(density)
+density = density[::-1, :]
+
+height, width = density.shape
+print(width, height)
+
+# window = app.Window(width=1024, height=1024)
+window = app.Window(width=width, height=height)
+
+
+@window.event
+def on_draw(dt):
+    window.clear()
+    cones.draw(gl.GL_TRIANGLES, I)
+
+    # Read back image
+    RGB = np.zeros((window.height, window.width, 3), dtype=np.uint8)
+    gl.glReadPixels(0, 0, window.width, window.height,
+                    gl.GL_RGB, gl.GL_UNSIGNED_BYTE, RGB)
+    V = (RGB[...,0]*256*256 + RGB[...,1]*256 + RGB[...,2]).ravel()
+
+    # Get individual Voronoi cells as a list of flatten indices
+    # This works because we took care of having unique colors
+    # See also StackOverflow:
+    #  "Get a list of all indices of repeated elements in a numpy array"
+    idx_sort = np.argsort(V)
+    sorted_V = V[idx_sort]
+    _, idx_start = np.unique(sorted_V, return_index=True)
+    regions = np.split(idx_sort, idx_start[1:])
+
+    shape = window.height, window.width
+    # areas = []
+    for i,region in enumerate(regions[1:]):
+        # areas.append(len(region))
+        # Y, X = np.unravel_index(region, shape)
+        # C["translate"][i] = X.mean(), Y.mean()
+
+        Y, X = np.unravel_index(region, shape)
+        P = np.dstack([X,Y]).squeeze()
+        D = density[Y,X].reshape(len(X), 1)
+        c = ((P*D)).sum(axis=0) / D.sum()
+        C["translate"][i] = c
+
+    # print(len(regions), np.mean(areas), np.std(areas))
+
+
+
+@window.event
+def on_close():
+    np.save("test.npy",C["translate"])
+
+
+@window.event
+def on_resize(width, height):
+    cones['projection'] = glm.ortho(0, width, 0, height, -5, +500)
+
+def makecone(n=32, radius=1024):
+    height = radius / np.tan(45 * np.pi / 180.0)
+    V = np.zeros((1+n,3))
+    V[0] = 0,0,0
+    T = np.linspace(0,2*np.pi,n, endpoint=False)
+    V[1:,0] = radius*np.cos(T)
+    V[1:,1] = radius*np.sin(T)
+    V[1:,2] = -height
+    I  = np.repeat([[0,1,2]], n, axis=0).astype(np.uint32)
+    I += np.arange(n,dtype=np.uint32).reshape(n,1)
+    I[:,0] = 0
+    I[-1] = 0,n,1
+    return V, I.ravel()
+
+
+n = n_point # number of cones (= number of points)
+p = 24      # faces per cones
+
+cones = gloo.Program(cone_vertex, cone_fragment)
+C = np.zeros((n,1+p), [("translate", np.float32, 2),
+                       ("position",  np.float32, 3),
+                       ("color",     np.float32, 3)]).view(gloo.VertexBuffer)
+I = np.zeros((n,3*p), np.uint32).view(gloo.IndexBuffer)
+I += (1+p)*np.arange(n, dtype=np.uint32).reshape(n,1)
+
+# Arbitrary but large scaling is important to better distinguish color later
+# when they will converted back to bytes.
+val = np.arange(1,n+1)*256
+rgb = np.zeros((n,3), dtype=np.float32)
+rgb[:,0] = (val//1)     % 256
+rgb[:,1] = (val//256)   % 256
+rgb[:,2] = (val//65536) % 256
+
+T = initialization(n_point, density)
+
+for i in range(n):
+    vertices, indices = makecone(p, radius=512)
+    C["color"][i] = rgb[i] / 255.0
+    C["position"][i] = vertices
+    C["translate"][i] = T[i] #np.random.uniform(0, width, 2)
+    I[i] += indices.ravel()
+cones.bind(C)
+
+gl.glEnable(gl.GL_DEPTH_TEST)
+app.run()

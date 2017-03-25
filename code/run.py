@@ -37,9 +37,6 @@ os.system("./stippler.py ../data/boots.jpg --save  \
            --n_point 20000 --n_iter 50 --pointsize 2.5 5.0 --figsize 8 \
            --threshold 255 --force --interactive")
 
-#os.system("montage -geometry 1500 -tile 1x2 -mode concatenate \
-#           ../data/boots.jpg ../data/boots-stipple.png ../data/boots-montage.png")
-
 os.system("./stippler.py ../data/pot-plant.jpg --save \
            --n_point 20000 --n_iter 50 --pointsize 2.0 4.0 --figsize 8 \
            --threshold 255 --force --interactive")

@@ -61,23 +61,33 @@ implementation that is simple and provides high stippling quality.
 
 # Methods
 
-We applied the method proposed in the original paper with some variations due
-to the non-use of the GPU for computing the Voronoi diagram. In the original
-article, the author computes the Voronoi diagram by taking advantage of the graphic
-card (GPU) and the fact that a set of cones seen from above actually represents
-a Voronoi diagram (see [@Hoff:1999]). We use instead
+We applied the method proposed in the original paper with some variations.
+First, we did not use the GPU to generate the Voronoi diagram because this
+would have introduced a dependency on OpenGL that would make the script more
+fragile and more difficult to run on some machines. However, we provide in the
+accompanying code an experimental implementation based on
+the [glumpy](http://glumpy.github.io) library. As in the original
+implementation, this experimental implementation takes advantage of the fact
+that a set of cones seen from above using an orthographic projectionactually
+represents a Voronoi diagram (see [@Hoff:1999]). This also gives "for free" a
+rasterization of each Voronoi region provided each cone has a distinct color.
+
+Consequently, for all the figures in this article, we used instead
 the [QHull](http://www.qhull.org) library (through
 the [Scipy](https://scipy.github.io) Python package) for computing the Voronoi
-diagram together with the Voronoi regions (as a list of segments). We also took
-care of adding extra points such that each cell is contained within a
-user-defined bounding box that will be set to the dimension of the density
-image. For computing the weighted centroid, we applied the definition proposed
-in the original paper over the discrete representation of the domain:
+diagram together with the Voronoi regions (as a list of segments). We took care
+of adding extra points such that each cell is contained within a user-defined
+bounding box that is set to the dimension of the density image. Furthermore,
+each input image is resized (without interpolation) such that the mean pixel
+size of a voronoi cell is 500. 
+
+For computing the weighted centroid, we applied the definition proposed in the
+original paper over the discrete representation of the domain:
 
 $${\bf C}_i = \frac{\int_A {\bf x}\rho({\bf x})dA}{\int_A \rho({\bf x})}$$
 
-However, we did not use the proposed optimization. Instead, each cell is
-rasterized (as a set of pixels) and the centroid is computed using the
+Each cell is rasterized (as a set of pixels) and the centroid is computed using
+the optimization proposed by the author that allow to avoid to compute the
 integrals over the whole set of pixels composing the Voronoi cell. As noted by
 the author, the precision of the method is directly related to the size of the
 Voronoi cell. Consequently, if the original density image is too small
@@ -89,44 +99,47 @@ original article and quite arbitrary.
 
 # Results
 
-We contacted the original author asking for permission to re-use
-the
-[original images](http://cs.nyu.edu/~ajsecord/npar2002/StipplingOriginals.zip)
-but did not obtain any response. We thus display here only the output of our
-replication to be compared with the original ones. The climbing shoe (figure
-@fig:shoe) and the corn plant (figure @fig:corn) are very similar to the images
-displayed in the original article. However, for the large and small Peperomia
-plants (figure @fig:large-plant & @fig:small-plant), the output of our
-replication is clearly at a lower quality without having identified the
-cause. Most probably, the limited resolution of the input image may be a
-critical factor and it is not clear if the author used these small resolution
-versions or if he used higher resolutions.
+We display only the output of our replication to be compared with the ones
+in the original articles. The climbing shoe (figure @fig:shoe), the corn plant
+(figure @fig:corn) and the large Peperomia plants (figure @fig:large-plant) are
+very similar to the images displayed in the original article. However, for the
+small Peperomia (figure @fig:small-plant), the output of our replication may be
+considered to be at a lower quality. The hard edges are maintained by the
+stipple drawing as in the original but the differences in shading in our
+replication is not obvious compated to the original one. Most probably, the
+limited resolution of the input image may be a critical factor but it is not
+clear if the author used these small resolution versions or if he used higher
+resolutions.
 
-![Climbing shoe (1300x1300), 5 000 dots, 50 iterations, point size 3](./shoe_1300x1300_org-stipple.pdf){#fig:shoe}
+![Climbing shoe (1300x1300), 5 000 dots, 50 iterations, fixed point size](./shoe_1300x1300_org-stipple.pdf){#fig:shoe}
 
-![Corn plant (991x934), 20 000 dots, 50 iterations, point size 1.5](./plant4h-stipple.pdf){#fig:corn}
+![Corn plant (991x934), 20 000 dots, 50 iterations, fixed point size](./plant4h-stipple.pdf){#fig:corn}
 
-![Large Peperomia plant (700x700), 20 000 dots, 50 iterations, point size 2.0](./plant5_700x700-stipple.pdf){#fig:large-plant}
+![Large Peperomia plant (700x700), 20 000 dots, 50 iterations, fixed point size](./plant5_700x700-stipple.pdf){#fig:large-plant}
 
-![Small Peperomia plant (400x400), 20 000 dots, 50 iterations, point size 1.0](./plant2_400x400-stipple.pdf){#fig:small-plant}
+![Small Peperomia plant (400x400), 20 000 dots, 50 iterations, fixed point size](./plant2_400x400-stipple.pdf){#fig:small-plant}
+
+![Figure (512x512), 1000 stipples, 50 iterations, fixed point size](./figure-montage.png){#fig:figure}
+
+![Close-up of large Peperomia leaves (1024x1024), 20000 stipples, 50 iterations, fixed point size](./leaves-montage.png){#fig:leaves}
 
 
 We also provide a new set of data that is freely usable for future comparison
 (CC0 licence).
 
-![Boots (1280x853), 20 000 dots, 50 iterations, variable point size \[0.5,2.5\]](./boots-montage.png){#fig:boots}
+![Boots (1280x853), 20 000 dots, 50 iterations, variable point size](./boots-montage.png){#fig:boots}
 
-![Pot plant (1195x1024), 20 000 dots, 50 iterations, variable point size \[0.5,2.0\]](./pot-plant-montage.png){#fig:pot-plant}
+![Pot plant (1195x1024), 20 000 dots, 50 iterations, variable point size](./pot-plant-montage.png){#fig:pot-plant}
 
-![Leafs (1195x1024), 20 000 dots, 50 iterations, variable point size \[0.5,2.0\]](./leafs-montage.png){#fig:leafs}
+![Leafs (1195x1024), 20 000 dots, 50 iterations, variable point size](./leafs-montage.png){#fig:leafs}
 
 
 # Conclusion
 
-Most of the results have been replicated even though some discrepancies remain
-in the final output. Without further contact with the original author, it is
-difficult to identify the precise cause but most likely, the problem occurs
-because of the very limited resolution of the input picture.
-
+Most of the results have been replicated even though some slight discrepancies
+remain in the final output for one image. Without further contact with the
+original author, it is difficult to identify the precise cause but most likely,
+the problem occurs because of the limited resolution of the input picture. We
+therefore think most of the results have been replicated.
 
 # References
