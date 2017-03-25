@@ -1,0 +1,9 @@
+*-stipple.*
+__pycache__
+*.aux
+*.bbl
+*.bcf
+*.log
+*.out
+*.run.xml
+*.blg
