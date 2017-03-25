@@ -24,6 +24,8 @@ def rasterize(V):
     X, Y = V[:, 0], V[:, 1]
     ymin = int(np.ceil(Y.min()))
     ymax = int(np.floor(Y.max()))
+    #ymin = int(np.round(Y.min()))
+    #ymax = int(np.round(Y.max()))
     P = []
     for y in range(ymin, ymax+1):
         segments = []
@@ -43,6 +45,8 @@ def rasterize(V):
         for i in range(0, (2*(len(segments)//2)), 2):
             x1 = int(np.ceil(segments[i]))
             x2 = int(np.floor(segments[i+1]))
+            # x1 = int(np.round(segments[i]))
+            # x2 = int(np.round(segments[i+1]))
             P.extend([[x, y] for x in range(x1, x2+1)])
     if not len(P):
         return V
@@ -234,6 +238,7 @@ def centroids(points, density, density_P=None, density_Q=None):
     centroids = []
     for region in regions:
         vertices = vor.vertices[region + [region[0]], :]
+        # vertices = vor.filtered_points[region + [region[0]], :]
 
         # Full version from all the points
         # centroid = weighted_centroid(vertices, density)

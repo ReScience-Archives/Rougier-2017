@@ -40,10 +40,11 @@
 #   --interactive         Display intermediate results (slower)
 # -----------------------------------------------------------------------------
 import tqdm
+import voronoi
 import os.path
 import scipy.misc
+import scipy.ndimage
 import numpy as np
-import voronoi
 
 def normalize(D):
     Vmin, Vmax = D.min(), D.max()
@@ -91,7 +92,7 @@ if __name__ == '__main__':
     default = {
         "n_point": 5000,
         "n_iter": 50,
-        "epsilon": 0.05,
+        "threshold": 255,
         "force": False,
         "save": False,
         "figsize": 6,
@@ -110,9 +111,6 @@ if __name__ == '__main__':
     parser.add_argument('--n_point', metavar='n', type=int,
                         default=default["n_point"],
                         help='Number of points')
-    parser.add_argument('--epsilon', metavar='n', type=float,
-                        default=default["epsilon"],
-                        help='Early stop criterion')
     parser.add_argument('--pointsize', metavar='(min,max)', type=float,
                         nargs=2, default=default["pointsize"],
                         help='Point mix/max size for final display')
@@ -122,6 +120,9 @@ if __name__ == '__main__':
     parser.add_argument('--force', action='store_true',
                         default=default["force"],
                         help='Force recomputation')
+    parser.add_argument('--threshold', metavar='n', type=int,
+                        default=default["threshold"],
+                        help='Grey level threshold')
     parser.add_argument('--save', action='store_true',
                         default=default["save"],
                         help='Save computed points')
@@ -135,6 +136,15 @@ if __name__ == '__main__':
 
     filename = args.filename
     density = scipy.misc.imread(filename, flatten=True, mode='L')
+
+    # We want (approximately) 500 pixels per voronoi region
+    zoom = (args.n_point * 500) / (density.shape[0]*density.shape[1])
+    zoom = int(round(np.sqrt(zoom)))
+    density = scipy.ndimage.zoom(density, zoom, order=0)
+    # Apply threshold onto image
+    # Any color > threshold will be white
+    density = np.minimum(density, args.threshold)
+
     density = 1.0 - normalize(density)
     density = density[::-1, :]
     density_P = density.cumsum(axis=1)
@@ -146,9 +156,6 @@ if __name__ == '__main__':
     png_filename = os.path.join(dirname, basename + "-stipple.png")
     dat_filename = os.path.join(dirname, basename + "-stipple.npy")
 
-    print("Density file: %s (%dx%d)" % (
-          filename, density.shape[1], density.shape[0]))
-
     # Initialization
     if not os.path.exists(dat_filename) or args.force:
         points = initialization(args.n_point, density)
@@ -158,6 +165,12 @@ if __name__ == '__main__':
         points = np.load(dat_filename)
         print("Nb points:", len(points))
         print("Nb iterations: -")
+    print("Density file: %s (resized to %dx%d)" % (
+          filename, density.shape[1], density.shape[0]))
+    print("Output file (PDF): %s " % pdf_filename)
+    print("            (PNG): %s " % png_filename)
+    print("            (DAT): %s " % dat_filename)
+
         
     xmin, xmax = 0, density.shape[1]
     ymin, ymax = 0, density.shape[0]
@@ -175,11 +188,15 @@ if __name__ == '__main__':
         ax.set_xticks([])
         ax.set_ylim([ymin, ymax])
         ax.set_yticks([])
-        scatter = ax.scatter(points[:, 0], points[:, 1], s=1, color=".25")
+        scatter = ax.scatter(points[:, 0], points[:, 1], s=1,
+                             facecolor="k", edgecolor="None")
 
         def update(frame):
             global points
+            # Recompute weighted centroids
             regions, points = voronoi.centroids(points, density, density_P, density_Q)
+
+            # Update figure
             Pi = points.astype(int)
             X = np.maximum(np.minimum(Pi[:, 0], density.shape[1]-1), 0)
             Y = np.maximum(np.minimum(Pi[:, 1], density.shape[0]-1), 0)
@@ -189,9 +206,9 @@ if __name__ == '__main__':
             scatter.set_sizes(sizes)
             bar.update()
 
-            # Save stipple points and stippled image
-            if (frame == args.n_iter-1 and
-                    not os.path.exists(dat_filename) or args.save):
+            # Save result at last frame
+            if (frame == args.n_iter-2 and
+                      (not os.path.exists(dat_filename) or args.save)):
                 np.save(dat_filename, points)
                 plt.savefig(pdf_filename)
                 plt.savefig(png_filename)
@@ -214,7 +231,8 @@ if __name__ == '__main__':
         ax.set_xticks([])
         ax.set_ylim([ymin, ymax])
         ax.set_yticks([])
-        scatter = ax.scatter(points[:, 0], points[:, 1], s=1, color=".25")
+        scatter = ax.scatter(points[:, 0], points[:, 1], s=1, 
+                             facecolor="k", edgecolor="None")
         Pi = points.astype(int)
         X = np.maximum(np.minimum(Pi[:, 0], density.shape[1]-1), 0)
         Y = np.maximum(np.minimum(Pi[:, 1], density.shape[0]-1), 0)
