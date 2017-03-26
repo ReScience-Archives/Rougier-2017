@@ -1,12 +1,10 @@
 # -----------------------------------------------------------------------------
-# Copyright (c) 2009-2016 Nicolas P. Rougier. All rights reserved.
+# Copyright (c) 2017 Nicolas P. Rougier. All rights reserved.
 # Distributed under the (new) BSD License.
 # -----------------------------------------------------------------------------
 import numpy as np
-import scipy.misc
-import scipy.ndimage
 from glumpy import app, gl, glm, gloo
-from glumpy.graphics.filter import Filter
+
 
 cone_vertex = """
 uniform mat4 projection;
@@ -29,62 +27,10 @@ void main()
 }
 """
 
-def normalize(D):
-    Vmin, Vmax = D.min(), D.max()
-    if Vmax - Vmin > 1e-5:
-        D = (D-Vmin)/(Vmax-Vmin)
-    else:
-        D = np.zeros_like(D)
-    return D
 
-
-def initialization(n, D):
-    """
-    Return n points distributed over [xmin, xmax] x [ymin, ymax]
-    according to (normalized) density distribution.
-
-    with xmin, xmax = 0, density.shape[1]
-         ymin, ymax = 0, density.shape[0]
-
-    The algorithm here is a simple rejection sampling.
-    """
-
-    samples = []
-    while len(samples) < n:
-        # X = np.random.randint(0, density.shape[1], 10*n)
-        # Y = np.random.randint(0, density.shape[0], 10*n)
-        X = np.random.uniform(0, density.shape[1], 10*n)
-        Y = np.random.uniform(0, density.shape[0], 10*n)
-        P = np.random.uniform(0, 1, 10*n)
-        index = 0
-        while index < len(X) and len(samples) < n:
-            x, y = X[index], Y[index]
-            x_, y_ = int(np.floor(x)), int(np.floor(y))
-            if P[index] < D[y_, x_]:
-                samples.append([x, y])
-            index += 1
-    return np.array(samples)
-
-
-
-n_point = 20000
-filename = "../data/original/plant2_400x400.png"
-
-density = scipy.misc.imread(filename, flatten=True, mode='L')
-# We want (approximately) 250 pixels per voronoi region
-zoom = (n_point * 200) / (density.shape[0]*density.shape[1])
-zoom = int(round(np.sqrt(zoom)))
-density = scipy.ndimage.zoom(density, zoom, order=0)
-#density = np.minimum(density, 220)
-density = 1.0 - normalize(density)
-density = density[::-1, :]
-
-height, width = density.shape
-print(width, height)
-
-# window = app.Window(width=1024, height=1024)
+n_point = 1000
+width, height = 1024, 1024
 window = app.Window(width=width, height=height)
-
 
 @window.event
 def on_draw(dt):
@@ -107,20 +53,9 @@ def on_draw(dt):
     regions = np.split(idx_sort, idx_start[1:])
 
     shape = window.height, window.width
-    # areas = []
     for i,region in enumerate(regions[1:]):
-        # areas.append(len(region))
-        # Y, X = np.unravel_index(region, shape)
-        # C["translate"][i] = X.mean(), Y.mean()
-
         Y, X = np.unravel_index(region, shape)
-        P = np.dstack([X,Y]).squeeze()
-        D = density[Y,X].reshape(len(X), 1)
-        c = ((P*D)).sum(axis=0) / D.sum()
-        C["translate"][i] = c
-
-    # print(len(regions), np.mean(areas), np.std(areas))
-
+        C["translate"][i] = X.mean(), Y.mean()
 
 
 @window.event
@@ -165,13 +100,13 @@ rgb[:,0] = (val//1)     % 256
 rgb[:,1] = (val//256)   % 256
 rgb[:,2] = (val//65536) % 256
 
-T = initialization(n_point, density)
-
 for i in range(n):
     vertices, indices = makecone(p, radius=512)
     C["color"][i] = rgb[i] / 255.0
     C["position"][i] = vertices
-    C["translate"][i] = T[i] #np.random.uniform(0, width, 2)
+    x = np.random.uniform(0, width)
+    y = np.random.uniform(0, height)
+    C["translate"][i] = x,y
     I[i] += indices.ravel()
 cones.bind(C)
 
