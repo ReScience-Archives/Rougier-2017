@@ -26,9 +26,8 @@ following packages:
  * Matplotlib 2.0.0
  * tqdm 4.10
  
-Original data is not freelty available and you will need to download the
-[original images](http://cs.nyu.edu/~ajsecord/npar2002/StipplingOriginals.zip)
-prior to running the `run.sh` to obtain results.
+Original data is in the data directory and you can also obtain it from
+[Adrian Secord homepage](http://cs.nyu.edu/~ajsecord/npar2002/StipplingOriginals.zip).
 
 ## Usage
 

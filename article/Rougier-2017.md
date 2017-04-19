@@ -120,7 +120,7 @@ drawing, the differences in shading in our replication is not obvious compared
 to the original image. Most probably, the limited resolution of the input image
 may be a limiting factor but it is not clear if the author used these small
 resolution versions or if he used higher resolutions. We tested this hypothesis
-using a bigger image showing leaf with different shading (figure {#fig:leafs})
+using a bigger image showing leaf with different shading (figure @fig:leafs)
 and in such a case, shading is visible in the output.
 
 

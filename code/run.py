@@ -12,7 +12,7 @@ os.system(cmd + " " + "./stippler.py ../data/original/plant4h.png --save \
            --n_point 20000 --n_iter 50 --pointsize 1.5 1.5 --figsize 6 \
            --threshold 255 --force --interactive")
 
-os.system(cmd + " " + "./stippler.py ../data/original/plant5_700x700.png  --save
+os.system(cmd + " " + "./stippler.py ../data/original/plant5_700x700.png  --save \
            --n_point 20000 --n_iter 50 --pointsize 2.5 2.5 --figsize 8 \
            --threshold 220 --force --interactive")
 
