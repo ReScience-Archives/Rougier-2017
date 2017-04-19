@@ -115,14 +115,13 @@ the original images. Without such threshold there would be no reason to have
 white areas as for example in the leaves of figure @fig:large-plant.
 
 For the small Peperomia (figure @fig:small-plant), the output of our
-replication may be considered to be not exactly similar. If the hard edges are
-maintained by the stipple drawing, the differences in shading in our
-replication is not obvious compared to the original image. Most probably, the
-limited resolution of the input image may be a limiting factor but it is not
-clear if the author used these small resolution versions or if he used higher
-resolutions. We tested this hypothesis using a bigger image showing leaf with
-different shading (figure {#fig:leafs}) and in such a case, shading is visible
-in the output.
+replication is less similar. If the hard edges are maintained by the stipple
+drawing, the differences in shading in our replication is not obvious compared
+to the original image. Most probably, the limited resolution of the input image
+may be a limiting factor but it is not clear if the author used these small
+resolution versions or if he used higher resolutions. We tested this hypothesis
+using a bigger image showing leaf with different shading (figure {#fig:leafs})
+and in such a case, shading is visible in the output.
 
 
 
