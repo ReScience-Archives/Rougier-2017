@@ -43,6 +43,6 @@ os.system(cmd + " " + "./stippler.py ../data/pot-plant.jpg --save \
            --n_point 20000 --n_iter 50 --pointsize 2.0 4.0 --figsize 8 \
            --threshold 255 --force --interactive")
 
-os.system (cmd + " " + "./stippler.py ../data/plant.jpg --save \
+os.system (cmd + " " + "./stippler.py ../data/leafs.jpg --save \
             --n_point 20000 --n_iter 50 --pointsize 2.0 4.0 --figsize 8 \
             --threshold 255 --force --interactive")
