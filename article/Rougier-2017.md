@@ -151,9 +151,9 @@ We also provide a new set of data that is freely usable for future comparison
 # Conclusion
 
 Most of the results have been replicated even though some slight discrepancies
-remain in the final output for one image. Without further contact with the
-original author, it is difficult to identify the precise cause but most likely,
-the problem occurs because of the limited resolution of the input picture. We
-therefore think most of the results have been replicated.
+remain in the final output for one image that are. It is difficult to identify
+the precise cause but most likely, the problem occurs because of the limited
+resolution of the input picture. We therefore think most of the results have
+been replicated.
 
 # References
