@@ -68,7 +68,7 @@ and more difficult to run on all systems (Linux/OSX/Windows). However, we
 provide in the accompanying code an experimental implementation based on
 the [glumpy](http://glumpy.github.io) library. As in the original article, this
 experimental implementation takes advantage of the fact that a set of cones
-seen from above using an orthographic projectionactually represents a Voronoi
+seen from above using an orthographic projection actually represents a Voronoi
 diagram (see [@Hoff:1999]). This also gives "for free" a rasterization of each
 Voronoi region provided each cone has a distinct color.
 
@@ -93,13 +93,13 @@ integrals over the whole set of pixels composing the Voronoi cell. As noted by
 the author, the precision of the method is directly related to the size of the
 Voronoi cell. Consequently, if the original density image is too small
 relatively to the number of stipples, there might be quality issues. We used a
-fixed number of iteration ($n=50$) instead of using the difference in the
+fixed number of iterations ($n=50$) instead of using the difference in the
 standard deviation of the area of the Voronoi regions as in the original paper
 since the definition of the rejection criterion was not clear in the original
 article and quite arbitrary.
 
 Last, we added a threshold parameter that allows to perform a pre-processing of
-the densty image. Any pixel with a gray level above the threshold is set to the
+the density image. Any pixel with a gray level above the threshold is set to the
 threshold value before normalizing the density image. This was necessary for
 replicating some of the original images (see results section for further
 explanation).
@@ -109,7 +109,7 @@ explanation).
 We display only the output of our replication to be compared with the ones in
 the original articles. The climbing shoe (figure @fig:shoe), the corn plant
 (figure @fig:corn) and the large Peperomia plants (figure @fig:large-plant) are
-very similar to the images displayed in the original article. It it to be noted
+very similar to the images displayed in the original article. It is to be noted
 that we used different thresholds in order to obtain white areas similmar to
 the original images. Without such threshold there would be no reason to have
 white areas as for example in the leaves of figure @fig:large-plant.
@@ -151,8 +151,8 @@ We also provide a new set of data that is freely usable for future comparison
 # Conclusion
 
 Most of the results have been replicated even though some slight discrepancies
-remain in the final output for one image that are. It is difficult to identify
-the precise cause but most likely, the problem occurs because of the limited
+remain in the final output for one image. It is difficult to identify the
+precise cause but most likely, the problem occurs because of the limited
 resolution of the input picture. We therefore think most of the results have
 been replicated.
 
