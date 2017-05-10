@@ -1,7 +1,7 @@
 
 # Weighted Voronoi Stippling
 
-![](data/boots-stipple.png)
+![](article/boots-montage.png)
 
 This is a replication of the following article:
 
