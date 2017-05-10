@@ -17,21 +17,22 @@ Address:
 Contact:
   - Nicolas.Rougier@inria.fr
 Editor:
-  - Name Surname
+  - Thomas Arildsen
 Reviewer:
-  - Name Surname
-  - Name Surname
+  - Roman Yurchak
+  - Almar Klein
 Publication:
-  received:  Feb, 1, 2017
-  accepted:  Feb, 1, 2017
-  published: Feb, 1, 2017
+  received:  Feb, 26, 2017
+  accepted:  May, 9, 2017
+  published: May, 10, 2017
   volume:    "**3**"
   issue:     "**1**"
-  date:      Feb 2017
+  date:      May 2017
+  number:    4
 Repository:
-  article:   "http://github.com/rescience/rescience-submission/article"
-  code:      "http://github.com/rescience/rescience-submission/code"
-  data:      "http://github.com/rescience/rescience-submission/data"
+  article:   "https://github.com/ReScience-Archives/Rougier-2017/tree/master/article"
+  code:      "https://github.com/ReScience-Archives/Rougier-2017/tree/master/code"
+  data:      "https://github.com/ReScience-Archives/Rougier-2017/tree/master/data"
   notebook:  
 Reproduction:
   - "Weighted Voronoi Stippling, Adrian Secord. In: Proceedings of the 2Nd
