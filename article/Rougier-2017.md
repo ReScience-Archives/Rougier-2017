@@ -24,7 +24,7 @@ Reviewer:
 Publication:
   received:  Feb, 26, 2017
   accepted:  May, 9, 2017
-  published: May, 10, 2017
+  published: Jun, 2, 2017
   volume:    "**3**"
   issue:     "**1**"
   date:      May 2017
