@@ -68,10 +68,10 @@ def initialization(n, D):
 
     samples = []
     while len(samples) < n:
-        # X = np.random.randint(0, density.shape[1], 10*n)
-        # Y = np.random.randint(0, density.shape[0], 10*n)
-        X = np.random.uniform(0, density.shape[1], 10*n)
-        Y = np.random.uniform(0, density.shape[0], 10*n)
+        # X = np.random.randint(0, D.shape[1], 10*n)
+        # Y = np.random.randint(0, D.shape[0], 10*n)
+        X = np.random.uniform(0, D.shape[1], 10*n)
+        Y = np.random.uniform(0, D.shape[0], 10*n)
         P = np.random.uniform(0, 1, 10*n)
         index = 0
         while index < len(X) and len(samples) < n:
