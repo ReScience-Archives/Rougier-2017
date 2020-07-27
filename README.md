@@ -26,6 +26,7 @@ following packages:
  * Matplotlib 2.0.0
  * tqdm 4.11.2
  * Pillow 4.0.0
+ * Imageio 2.9.0
  
 Original data is in the data directory and you can also obtain it from
 [Adrian Secord homepage](http://cs.nyu.edu/~ajsecord/npar2002/StipplingOriginals.zip).
