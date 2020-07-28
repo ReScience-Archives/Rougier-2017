@@ -1,5 +1,8 @@
+Features of This Repo:
+# 1. Travelling Salesperson Art
+![](article/example_tsp.png)
 
-# Weighted Voronoi Stippling
+# 2. Weighted Voronoi Stippling
 
 ![](article/boots-montage.png)
 
@@ -15,7 +18,7 @@ traditional artistic technique of stippling that places small dots of ink onto
 paper such that their density give the impression of tone*.
 
 
-## Pre-requisites
+## Setup:
 
 This replication has been written and tested on OSX 10.12 (Sierra) using the
 following packages:
@@ -27,10 +30,27 @@ following packages:
  * tqdm 4.11.2
  * Pillow 4.0.0
  * Imageio 2.9.0
- 
-Original data is in the data directory and you can also obtain it from
-[Adrian Secord homepage](http://cs.nyu.edu/~ajsecord/npar2002/StipplingOriginals.zip).
+ ### Setup Instructions (for TSP): 
+0. Make a venv for this repo (recommended). Python 3.5+ works best:
+```python3 -m venv TSP  ```
+1. activate the venv and use pip to install the following:
+```pip3 install numpy pandas matplotlib Pillow cython ```
 
+2. You'll need the concorde TSP solver -- one of the most powerful TSP solvers around, and to get in it python, you'll have to do the following:
+  a. clone the python wrapper library 
+  ```
+  git clone https://github.com/jvkersch/pyconcorde
+  cd pyconcorde
+  ```
+  b. run pip install  (dont forget the period). This may take a minute. 
+  ```
+  pip3 install -e .
+  ```
+  c. verify installation. open up the python interpreter and type:
+  ```from concorde.tsp import TSPSolver ```
+  And make sure it doesn't fail.
+  
+  
 ## Usage
 
 ```
