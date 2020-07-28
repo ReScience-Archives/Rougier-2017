@@ -153,9 +153,9 @@ if __name__ == '__main__':
 
     dirname = os.path.dirname(filename)
     basename = (os.path.basename(filename).split('.'))[0]
-    pdf_filename = os.path.join(dirname, basename + "-stipple.pdf")
-    png_filename = os.path.join(dirname, basename + "-stipple.png")
-    dat_filename = os.path.join(dirname, basename + "-stipple.npy")
+    pdf_filename = os.path.join(dirname, basename + "_stipple.pdf")
+    png_filename = os.path.join(dirname, basename + "_stipple.png")
+    dat_filename = os.path.join(dirname, basename + "_stipple.npy")
 
     # Initialization
     if not os.path.exists(dat_filename) or args.force:
