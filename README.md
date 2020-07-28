@@ -52,7 +52,36 @@ following packages:
   
   
 ## Usage
+```
+usage: generate_tsp.py [-h] filepath
 
+positional arguments:
+  filepath    location of source image
+
+optional arguments:
+  -h, --help  show this help message and exit
+
+```
+```
+usage: tsp.py [-h] [--time_bound n] [--verbosity bool] [--norm str] [--save]
+              [--display] [--output_filename OUTPUT_FILENAME]
+              .dat/.npy filename
+
+TSP art from stippled image generator
+
+positional arguments:
+  .dat/.npy filename    location of .dat/.npy filename, output of stipple.py
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --time_bound n        Upperbound for TSP solver to find solution.
+  --verbosity bool      Verbosity of TSP solver.
+  --norm str            edge weight for TSP solver
+  --save                Save computed points
+  --display             Display final result
+  --output_filename OUTPUT_FILENAME
+                        Solved filename
+```
 ```
  usage: stippler.py [--n_iter n] [--n_point n] [--save] [--force]
                     [--pointsize min,max] [--figsize w,h]
